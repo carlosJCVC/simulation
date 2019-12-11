@@ -16,7 +16,7 @@ Route::get('/', function(){
     return redirect(route('login'));
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['get.menu'], 'as' => 'admin.', 'namespace' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['get.menu', 'auth'], 'as' => 'admin.', 'namespace' => 'admin'], function () {
     Route::get('/', [
         'as' => 'admin.home',
         'uses' => 'HomeController@index'
@@ -28,6 +28,33 @@ Route::group(['prefix' => 'admin', 'middleware' => ['get.menu'], 'as' => 'admin.
     Route::get('/500', function () {        return view('coreui.500'); });
     
     // custom routes
+    //----------- PRODUCTS ------------//
+    Route::get('products', [
+        'as' => 'products.index',
+        'uses' => 'ProductController@index',
+    ]);
+    Route::get('products/show/{product}', [
+        'as' => 'products.show',
+        'uses' => 'ProductController@show',
+    ]);
+    Route::post('products/store', [
+        'as' => 'products.store',
+        'uses' => 'ProductController@store',
+    ]);
+    Route::put('products/{product}', [
+        'as' => 'products.update',
+        'uses' => 'ProductController@update',
+    ]);
+    Route::patch('products/{product}', [
+        'as' => 'products.update',
+        'uses' => 'ProductController@update',
+    ]);
+    Route::delete('products/{product}', [
+        'as' => 'products.destroy',
+        'uses' => 'ProductController@destroy',
+    ]);
+
+
     //----------- DEMANDS ------------//
     Route::get('demands', [
         'as' => 'demands.index',

@@ -25,7 +25,7 @@ class HomeController extends Controller
             'purchase_price_min' => DB::table('purchases_price')->max('purchases_price')
         ];
 
-        return View('coreui.homepage', [ 'values' => $values ]);
+        return View('admin.homepage', [ 'values' => $values ]);
     }
 
 }

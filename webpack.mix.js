@@ -11,43 +11,59 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js');
-//mix.sass('resources/sass/app.scss', 'public/css');
+mix.styles([
+   'resources/assets/template/css/font-awesome.min.css',
+   'resources/assets/template/css/simple-line-icons.min.css',
+   'resources/assets/template/css/select2.css',
+   'resources/assets/template/css/style.css',
+], 'public/css/template.css')
+   .scripts([
+   'resources/assets/template/js/jquery.min.js',
+   'resources/assets/template/js/popper.min.js',
+   'resources/assets/template/js/bootstrap.min.js',
+   'resources/assets/template/js/Chart.min.js',
+   'resources/assets/template/js/pace.min.js',
+   'resources/assets/template/js/select2.js',
+   'resources/assets/template/js/template.js',
+], 'public/js/template.js');
+
+ mix.js('resources/js/app.js', 'public/js');
+   mix.sass('resources/sass/app.scss', 'public/css');
 
 //**************** CSS ******************** 
 //css
-mix.copy('resources/vendors/pace-progress/css/pace.min.css', 'public/css'); //V
-mix.copy('node_modules/@coreui/coreui-chartjs/dist/css/coreui-chartjs.css', 'public/css'); //V
+//mix.copy('resources/vendors/pace-progress/css/pace.min.css', 'public/css'); //V
+//mix.copy('node_modules/@coreui/coreui-chartjs/dist/css/coreui-chartjs.css', 'public/css'); //V
 //main css
-mix.sass('resources/sass/style.scss', 'public/css');
+//mix.sass('resources/sass/style.scss', 'public/css');
 
 //************** SCRIPTS ****************** 
 // general scripts
-mix.copy('node_modules/pace-progress/pace.min.js', 'public/js');  //V 
-mix.copy('node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js', 'public/js');  //V
+//mix.copy('node_modules/pace-progress/pace.min.js', 'public/js');  //V 
+//mix.copy('node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js', 'public/js');  //V
 // views scripts
-mix.copy('node_modules/chart.js/dist/Chart.min.js', 'public/js');  //V
+//mix.copy('node_modules/chart.js/dist/Chart.min.js', 'public/js');  //V
 
-mix.copy('node_modules/@coreui/coreui-chartjs/dist/js/coreui-chartjs.bundle.js', 'public/js'); //V
+//mix.copy('node_modules/@coreui/coreui-chartjs/dist/js/coreui-chartjs.bundle.js', 'public/js'); //V
 // details scripts
-mix.copy('resources/js/coreui/main.js', 'public/js');
-mix.copy('resources/js/coreui/colors.js', 'public/js');
-mix.copy('resources/js/coreui/charts.js', 'public/js');
-mix.copy('resources/js/coreui/widgets.js', 'public/js');
-mix.copy('resources/js/coreui/popovers.js', 'public/js');
-mix.copy('resources/js/coreui/tooltips.js', 'public/js');
+//mix.copy('resources/js/coreui/main.js', 'public/js');
+//mix.copy('resources/js/coreui/colors.js', 'public/js');
+//mix.copy('resources/js/coreui/charts.js', 'public/js');
+//mix.copy('resources/js/coreui/widgets.js', 'public/js');
+//mix.copy('resources/js/coreui/popovers.js', 'public/js');
+//mix.copy('resources/js/coreui/tooltips.js', 'public/js');
 //*************** OTHER ****************** 
 //fonts
-mix.copy('node_modules/@coreui/icons/fonts', 'public/fonts');
+//mix.copy('node_modules/@coreui/icons/fonts', 'public/fonts');
 //icons
-mix.copy('node_modules/@coreui/icons/css/free.min.css', 'public/css');
-mix.copy('node_modules/@coreui/icons/css/brand.min.css', 'public/css');
-mix.copy('node_modules/@coreui/icons/css/flag.min.css', 'public/css');
-mix.copy('node_modules/@coreui/icons/svg/flag', 'public/svg/flag');
+//mix.copy('node_modules/@coreui/icons/css/free.min.css', 'public/css');
+//mix.copy('node_modules/@coreui/icons/css/brand.min.css', 'public/css');
+//mix.copy('node_modules/@coreui/icons/css/flag.min.css', 'public/css');
+//mix.copy('node_modules/@coreui/icons/svg/flag', 'public/svg/flag');
 
-mix.copy('node_modules/@coreui/icons/sprites/', 'public/icons/sprites');
+//mix.copy('node_modules/@coreui/icons/sprites/', 'public/icons/sprites');
 //images
-mix.copy('resources/assets', 'public/assets');
+//mix.copy('resources/assets', 'public/assets');
 
 //mix.js('resources/assets/js/app.js', 'public/js');
    //.sass('resources/assets/sass/app.scss', 'public/css');
