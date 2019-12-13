@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\Demand;
+use App\models\Product;
+use App\Http\Requests\DemandRequest;
 use DB;
 
 class DemandController extends Controller
@@ -27,16 +29,17 @@ class DemandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DemandRequest $request, Product $product)
     {
         $input = $request->all();
+        $input['product_id'] = $product->id;
 
         $demand = new Demand($input);
         $demand->save();
 
         $this->updateDemands();
 
-        return redirect(route('admin.demands.index'))->with([ 'message' => 'Demanda creado exitosamente!', 'alert-type' => 'success' ]);
+        return redirect(route('admin.products.simulate.index', $product->id))->with([ 'message' => 'Demanda creado exitosamente!', 'alert-type' => 'success' ]);
     }
 
     public function updateDemands() {

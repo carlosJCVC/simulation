@@ -12,6 +12,6 @@ class Demand extends Model
      * @var array
      */
     protected $fillable = [
-        'sold_units', 'number_days', 'probability', 'accumulate_probability'
+        'product_id', 'sold_units', 'number_days', 'probability', 'accumulate_probability'
     ];
 }

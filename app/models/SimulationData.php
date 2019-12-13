@@ -19,6 +19,7 @@ class SimulationData extends Model
      * @var array
      */
     protected $fillable = [ 
+        'product_id',
         'demand',
         'sale_price',
         'purchase_price',

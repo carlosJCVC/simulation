@@ -56,6 +56,7 @@
     </footer>
 
     <script src="{{ asset('js/template.js') }}" type="text/javascript"></script>
+    
     @yield('scripts')
 
 </body>

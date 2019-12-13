@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\PurchasePrice;
 use DB;
+use App\Http\Requests\PurchaseRequest;
+use App\models\Product;
 
 class PurchasePriceController extends Controller
 {
@@ -27,16 +29,17 @@ class PurchasePriceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PurchaseRequest $request, Product $product)
     {
         $input = $request->all();
+        $input['product_id'] = $product->id;
 
         $purchase_price = new PurchasePrice($input);
         $purchase_price->save();
 
         $this->updatePurchases();
 
-        return redirect(route('admin.purchases_price.index'))->with([ 'message' => 'Precio de creado exitosamente!', 'alert-type' => 'success' ]);
+        return redirect(route('admin.products.simulate.index', $product->id))->with([ 'message' => 'Precio de Venta creado exitosamente!', 'alert-type' => 'success' ]);
     }
 
     public function updatePurchases() {

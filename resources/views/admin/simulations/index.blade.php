@@ -1,12 +1,13 @@
-@extends('coreui.base')
+@extends('admin.layouts.app')
 
 @section('content')
 <div class="container-fluid">
     <div class="fade-in">
+        <div class="btn btn-outline-success" onclick="openModalSimulate({{$product}})">Simular</div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header"><i class="fa fa-align-justify"></i> Combined All Table</div>
+                    <div class="card-header"><i class="fa fa-align-justify"></i> Datos de la simulacion</div>
                     <div class="card-body">
                         <table class="table table-responsive-sm table-bordered table-striped table-sm">
                         <thead>
@@ -36,27 +37,36 @@
                             @endforelse
                         </tbody>
                         </table>
-                        <nav>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                        </nav>
                     </div>
                 </div>
             </div>
             <!-- /.col-->
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Demandas
+                        <div class="card-header-actions"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="c-chart-wrapper">
+                            <canvas id="canvas-1"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+@include('admin.simulations.modal_simulate', [ 'item' => $product])
+
 @endsection
 
-@section('javascript')
+@section('scripts')
     <script>
-    alert()
+        const openModalSimulate = (product) => {
+            $('#modalNuevaSimulacion').modal('show')
+        }
     </script>
 @endsection

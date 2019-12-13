@@ -15,6 +15,7 @@ class CreateSimulationDataTable extends Migration
     {
         Schema::create('simulation_data', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('product_id');
             $table->float('demand');
             $table->float('sale_price');
             $table->float('purchase_price');

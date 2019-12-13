@@ -42,6 +42,7 @@
                                                 <i class="icon-trash">
                                         </button>
                                     </form>
+                                <a href="{{ route('admin.products.simulate.index', $item->id) }}" class="btn btn-outline-primary">Simular</i></a>
                                 </td>
                                 </tr>
                             @empty

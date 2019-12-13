@@ -55,6 +55,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['get.menu', 'auth'], 'as' =>
     ]);
 
 
+    //------------ Simular ------------//
+    Route::get('product/{product}/simulation', [
+        'as' => 'products.simulate.index',
+        'uses' => 'SimulateController@index',
+    ]);
+    Route::get('simulation/{product}', [
+        'as' => 'simulate.data',
+        'uses' => 'SimulateController@simulate',
+    ]);
+    Route::get('simulation/{product}/store', [
+        'as' => 'simulate.data.store',
+        'uses' => 'SimulationController@index',
+    ]);
+
     //----------- DEMANDS ------------//
     Route::get('demands', [
         'as' => 'demands.index',
@@ -64,7 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['get.menu', 'auth'], 'as' =>
         'as' => 'demands.show',
         'uses' => 'DemandController@show',
     ]);
-    Route::post('demands/store', [
+    Route::post('demands/{product}/store', [
         'as' => 'demands.store',
         'uses' => 'DemandController@store',
     ]);
@@ -86,11 +100,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['get.menu', 'auth'], 'as' =>
         'as' => 'sales_price.index',
         'uses' => 'SalePriceController@index',
     ]);
+    Route::get('sales_price/json', [
+        'as' => 'sales_price.json',
+        'uses' => 'SalePriceController@json',
+    ]);
     Route::get('sales_price/show/{sale_price}', [
         'as' => 'sales_price.show',
         'uses' => 'SalePriceController@show',
     ]);
-    Route::post('sales_price/store', [
+    Route::post('sales_price/{product}/store', [
         'as' => 'sales_price.store',
         'uses' => 'SalePriceController@store',
     ]);
@@ -116,7 +134,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['get.menu', 'auth'], 'as' =>
         'as' => 'purchases_price.show',
         'uses' => 'PurchasePriceController@show',
     ]);
-    Route::post('purchases_price/store', [
+    Route::post('purchases_price/{product}/store', [
         'as' => 'purchases_price.store',
         'uses' => 'PurchasePriceController@store',
     ]);

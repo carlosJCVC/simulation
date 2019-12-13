@@ -19,6 +19,6 @@ class SalePrice extends Model
      * @var array
      */
     protected $fillable = [
-        'sales_price', 'number_days', 'probability', 'accumulate_probability',
+        'product_id', 'sales_price', 'number_days', 'probability', 'accumulate_probability',
     ];
 }

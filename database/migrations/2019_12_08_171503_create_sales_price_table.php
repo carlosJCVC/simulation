@@ -15,6 +15,7 @@ class CreateSalesPriceTable extends Migration
     {
         Schema::create('sales_price', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('product_id');
             $table->float('sales_price');
             $table->float('number_days');
             $table->float('probability')->nullable();

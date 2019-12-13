@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\models\SimulationData;
+use App\models\Product;
 
 class SimulationController extends Controller
 {
@@ -14,17 +15,18 @@ class SimulationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $resquest, Product $product)
     {
         SimulationData::query()->truncate();
 
-        for ($i=0; $i < 10 ; $i++) { 
+        for ($i=0; $i < $resquest->number_runs ; $i++) { 
 
-            $demand_simulate = $this->getDemandValue();
-            $sale_simulate = $this->getSaleValue();
-            $purchase_simulate = $this->getPurchaseValue();
-    
+            $demand_simulate = $this->getDemandValue($product);
+            $sale_simulate = $this->getSaleValue($product);
+            $purchase_simulate = $this->getPurchaseValue($product);
+
             $values = [
+                'product_id' => $product->id,
                 'demand' => $demand_simulate,
                 'sale_price' => $sale_simulate,
                 'purchase_price' => $purchase_simulate,
@@ -53,16 +55,16 @@ class SimulationController extends Controller
             $data->save();
         }
 
-        $data = DB::table('simulation_data')->get();
-
-        return View('admin.simulations.index', [ 'data' => $data ]);
+        $data = DB::table('simulation_data')->where('product_id', $product->id)->get();
+        
+        return View('admin.simulations.index', [ 'product' => $product, 'data' => $data]);
     }
 
-    public function getDemandValue() {
+    public function getDemandValue($product) {
 
         //$max = DB::table('demands')->max('accumulate_probability');
         //$min = DB::table('demands')->min('accumulate_probability');
-        $demands = DB::table('demands')->pluck('sold_units', 'accumulate_probability');
+        $demands = DB::table('demands')->where('product_id', $product->id)->pluck('sold_units', 'accumulate_probability');
         
         $num = $this->getRandonNumber();
 
@@ -71,9 +73,9 @@ class SimulationController extends Controller
         return $value+1;
     }
 
-    public function getSaleValue() {
+    public function getSaleValue($product) {
 
-        $sales = DB::table('sales_price')->pluck('sales_price', 'accumulate_probability');
+        $sales = DB::table('sales_price')->where('product_id', $product->id)->pluck('sales_price', 'accumulate_probability');
         
         $num = $this->getRandonNumber();
 
@@ -82,9 +84,9 @@ class SimulationController extends Controller
         return $value+1;
     }
 
-    public function getPurchaseValue() {
+    public function getPurchaseValue($product) {
 
-        $purchases = DB::table('purchases_price')->pluck('purchases_price', 'accumulate_probability');
+        $purchases = DB::table('purchases_price')->where('product_id', $product->id)->pluck('purchases_price', 'accumulate_probability');
 
         $num = $this->getRandonNumber();
 

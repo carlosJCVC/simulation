@@ -19,6 +19,6 @@ class PurchasePrice extends Model
      * @var array
      */
     protected $fillable = [
-        'purchases_price', 'number_days', 'probability', 'accumulate_probability',
+        'product_id', 'purchases_price', 'number_days', 'probability', 'accumulate_probability',
     ];
 }

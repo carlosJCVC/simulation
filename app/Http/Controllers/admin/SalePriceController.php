@@ -5,7 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\SalePrice;
+use App\models\Product;
 use DB;
+use App\Http\Requests\SaleRequest;
 
 class SalePriceController extends Controller
 {
@@ -22,21 +24,34 @@ class SalePriceController extends Controller
     }
 
     /**
+     * Display a listing of the resource in json.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function json()
+    {
+        $sales_price = DB::table('sales_price')->get();
+
+        return response()->json($sales_price);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaleRequest $request, Product $product)
     {
         $input = $request->all();
+        $input['product_id'] = $product->id;
 
         $sale_price = new SalePrice($input);
         $sale_price->save();
 
         $this->updateSales();
 
-        return redirect(route('admin.sales_price.index'))->with([ 'message' => 'Precio de Venta creado exitosamente!', 'alert-type' => 'success' ]);
+        return redirect(route('admin.products.simulate.index', $product->id))->with([ 'message' => 'Precio de Venta creado exitosamente!', 'alert-type' => 'success' ]);
     }
 
     public function updateSales() {
